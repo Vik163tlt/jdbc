@@ -5,27 +5,49 @@ import java.util.List;
 public class Application {
 
     public static void main(String[] args) throws SQLException {
-
         EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-
-//        Employee alexey = new Employee("Alexey", "Tolstov", "male", 21, 5);
-//        employeeDAO.add(alexey);
-
+//
         System.out.println(employeeDAO.getById(1));
+//
+        Employee employee1 = new Employee(10, "Evgeniy", "Popov", "male", 32, 8);
+//        employeeDAO.updateEmployee(employee1);
+//        System.out.println(employeeDAO.getById(1));
+//        List<Employee> employeeList = employeeDAO.readAll();
+//        for (Employee employee : employeeList) {
+//            System.out.println(employee);
+//        }
+//        employeeDAO.deleteEmployee(employee1);
 
-        Employee irina = new Employee(1, "Irina", "Drozd", "female", 37, 1);
-        employeeDAO.updateEmployee(irina);
+        CityDao cityDao = new CityDAOImpl();
 
-        List<Employee> list = employeeDAO.readAll();
+        List<Employee> employeesFromIjevsk = List.of(employee1);
+        City ijevsk = new City("Ижевск", employeesFromIjevsk);
 
-        for (Employee employee : list) {
-            System.out.println(employee);
+//        City ufa = new City("Уфа");
+//        cityDao.add(ufa);
+
+        City ufa = new City("Уфа");
+        cityDao.add(ufa);
+
+
+        List<City> cityList = cityDao.readAll();
+
+        for (City city : cityList) {
+            System.out.println(city);
         }
-//        employeeDAO.deleteEmployee(alexey);
+        cityDao.getById(1);
 
-        for (Employee employee : list) {
-            System.out.println(employee);
+        City penza = new City(ufa.getCity_id(),"Пенза");
+
+        cityDao.updateCity(ufa);
+
+        for (City city : cityList) {
+            System.out.println(city);
         }
+
+        cityDao.deleteCity(ufa);
+        for (City city: cityList) {
+          System.out.println(city);}
     }
 }
 
